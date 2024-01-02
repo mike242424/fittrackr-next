@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { capitalizeWords } from '../utils/capitalizeWords';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 interface Exercise {
   id: string;
@@ -14,6 +15,7 @@ interface Exercise {
 const SearchExercise = () => {
   const [exercises, setExercises] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const targetMuscles = [
     'Abductors',
@@ -39,6 +41,7 @@ const SearchExercise = () => {
 
   const handleClick = async (muscle: string) => {
     try {
+      setIsLoading(true);
       const response = await fetch(
         `https://exercisedb.p.rapidapi.com/exercises/target/${muscle.toLowerCase()}?limit=200`,
         {
@@ -52,6 +55,7 @@ const SearchExercise = () => {
       );
       const result = await response.json();
       setExercises(result);
+      setIsLoading(false);
     } catch (error) {
       console.error('Failed to fetch exercises', error);
     }
@@ -107,7 +111,9 @@ const SearchExercise = () => {
         </ul>
       </details>
       <div className="mt-6">
-        {exercises &&
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
           exercises.map((exercise: Exercise) => (
             <div
               className="border border-white grid grid-cols-1 md:grid-cols-2 gap-4 text-justify m-8"
@@ -137,7 +143,8 @@ const SearchExercise = () => {
                 <img src={exercise.gifUrl} alt={exercise.name} />
               </div>
             </div>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
