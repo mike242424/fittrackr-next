@@ -110,7 +110,7 @@ const SearchExercise = () => {
         {exercises &&
           exercises.map((exercise: Exercise) => (
             <div
-              className=" border border-white grid grid-cols-2 gap-4 text-justify m-8"
+              className="border border-white grid grid-cols-1 md:grid-cols-2 gap-4 text-justify m-8"
               key={exercise.id}
             >
               <div className="p-6">
@@ -133,13 +133,8 @@ const SearchExercise = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex justify-end">
-                <img
-                  src={exercise.gifUrl}
-                  alt={exercise.name}
-                  height={200}
-                  width="auto"
-                />
+              <div className="flex justify-center md:justify-end">
+                <img src={exercise.gifUrl} alt={exercise.name} />
               </div>
             </div>
           ))}
