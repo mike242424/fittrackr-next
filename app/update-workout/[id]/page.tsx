@@ -67,21 +67,21 @@ const UpdateWorkoutPage = ({ params: { id } }: { params: { id: string } }) => {
         onSubmit={handleSubmit}
       >
         <input
-          className="p-3 bg-white rounded text-black"
+          className="p-3 bg-white rounded text-black outline-indigo-700"
           type="text"
           placeholder="Workout Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
-          className="p-3 bg-white rounded text-black"
+          className="p-3 bg-white rounded text-black outline-indigo-700"
           type="text"
           placeholder="Workout Location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
         <textarea
-          className="p-3 bg-white rounded text-black"
+          className="p-3 bg-white rounded text-black outline-indigo-700"
           cols={20}
           rows={10}
           placeholder="Workout Notes"

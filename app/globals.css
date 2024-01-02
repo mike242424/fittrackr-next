@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #add-workout-btn:focus {
-  color: #fff !important;
-  background-color: #000 !important;
+select {
+  padding: 13.5px !important;
+  border-radius: 8px !important;
 }
 
-#my-workout-btn:focus {
-  color: #fff !important;
-  background-color: #000 !important;
-} */
+/* Style the options */
+select option:hover {
+  background-color: red !important;
+  color: black !important;
+}
+
+/* Style the options on hover */
+select option:hover {
+  background-color: red !important;
+}

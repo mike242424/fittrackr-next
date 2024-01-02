@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Exercise {
   id: string;
@@ -34,8 +34,8 @@ function capitalizeWords(input: string): string {
 }
 
 const SearchExercise = () => {
-  const [search, setSearch] = useState('');
   const [exercises, setExercises] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const targetMuscles = [
     'Abductors',
@@ -59,12 +59,10 @@ const SearchExercise = () => {
     'Upper Back',
   ];
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleClick = async (muscle: string) => {
     try {
       const response = await fetch(
-        `https://exercisedb.p.rapidapi.com/exercises/target/${search.toLowerCase()}?limit=200`,
+        `https://exercisedb.p.rapidapi.com/exercises/target/${muscle.toLowerCase()}?limit=200`,
         {
           method: 'GET',
           headers: {
@@ -76,39 +74,57 @@ const SearchExercise = () => {
       );
       const result = await response.json();
       setExercises(result);
-      console.log(exercises.length);
     } catch (error) {
       console.error('Failed to fetch exercises', error);
     }
+
+    setDropdownOpen(false);
   };
+
+  const handleDropdownClick = (
+    event: React.MouseEvent<HTMLDetailsElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleDocumentClick = (event: MouseEvent) => {
+    if (event.target instanceof Element && !event.target.closest('.dropdown')) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, [dropdownOpen]);
 
   return (
     <div className="text-center">
       <h1 className="text-3xl font-bold mb-6">Search Exercises</h1>
-      <form onSubmit={handleSubmit}>
-        <select
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="p-3 bg-white rounded text-black w-80"
-        >
-          <option value="" disabled>
-            Select A Target Muscle
-          </option>
+      <details
+        className="dropdown"
+        open={dropdownOpen}
+        onClick={handleDropdownClick}
+      >
+        <summary className="m-1 p-5 bg-indigo-700 hover:bg-black text-white rounded font-bold">
+          Select A Target Muscle
+        </summary>
+        <ul className="shadow menu dropdown-content z-[1] bg-indigo-700 text-black w-96 grid grid-cols-3 rounded left-[-5rem]">
           {targetMuscles.map((muscle, index) => (
-            <option key={index} value={muscle}>
+            <li
+              className="font-bold p-3 text-left hover:text-black text-white"
+              key={index}
+              onClick={() => handleClick(muscle)}
+            >
               {muscle}
-            </option>
+            </li>
           ))}
-        </select>
-
-        <button
-          className="btn border-indigo-700 bg-indigo-700 hover:bg-black text-white ml-4"
-          type="submit"
-        >
-          Search
-        </button>
-      </form>
-
+        </ul>
+      </details>
       <div className="mt-6">
         {exercises &&
           exercises.map((exercise: Exercise) => (
