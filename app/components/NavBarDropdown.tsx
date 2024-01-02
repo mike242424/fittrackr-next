@@ -5,20 +5,20 @@ import { useEffect, useState } from 'react';
 import { IoIosArrowDropdownCircle } from 'react-icons/io';
 
 const NavBarDropdown = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownNavOpen, setDropdownNavOpen] = useState(false);
 
   const handleClick = () => {
-    setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
+    setDropdownNavOpen((prevDropdownNavOpen) => !prevDropdownNavOpen);
   };
 
   const handleLinkClick = () => {
-    setDropdownOpen(false);
+    setDropdownNavOpen(false);
   };
 
   const handleDocumentClick = (e: MouseEvent) => {
     const targetElement = e.target as Element;
-    if (!targetElement.closest('.navbar-dropdown')) {
-      setDropdownOpen(false);
+    if (!targetElement.closest('.dropdown-navbar')) {
+      setDropdownNavOpen(false);
     }
   };
 
@@ -32,7 +32,7 @@ const NavBarDropdown = () => {
 
   return (
     <>
-      <div className="dropdown">
+      <div className="dropdown dropdown-navbar">
         <label tabIndex={0} className="m-1" onClick={handleClick}>
           <IoIosArrowDropdownCircle
             size={'3rem'}
@@ -42,7 +42,7 @@ const NavBarDropdown = () => {
         <ul
           tabIndex={0}
           className={`dropdown-content p-5 shadow text-white bg-indigo-700 w-52 left-[-8rem] ${
-            dropdownOpen ? 'block' : 'hidden'
+            dropdownNavOpen ? 'block' : 'hidden'
           }`}
         >
           <li className="mt-4 mb-5">

@@ -67,7 +67,10 @@ const SearchExercise = () => {
   };
 
   const handleDocumentClick = (e: MouseEvent) => {
-    if (e.target instanceof Element && !e.target.closest('.dropdown')) {
+    if (
+      e.target instanceof Element &&
+      !e.target.closest('.dropdown-exercise')
+    ) {
       setDropdownOpen(false);
     }
   };
@@ -84,7 +87,7 @@ const SearchExercise = () => {
     <div className="text-center">
       <h1 className="text-3xl font-bold mb-6">Search Exercises</h1>
       <details
-        className="dropdown cursor-pointer"
+        className="dropdown dropdown-exercise cursor-pointer"
         open={dropdownOpen}
         onClick={handleDropdownClick}
       >
