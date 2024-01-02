@@ -47,23 +47,23 @@ const WorkoutsPage = async () => {
                   className="font-normal md:font-bold hover table-left"
                   key={workout.id}
                 >
-                  <td>
+                  <td className="align-top">
                     <Link href={`/workouts/${workout.id}`}>{workout.name}</Link>
                   </td>
-                  <td>
+                  <td className="align-top">
                     <Link href={`/workouts/${workout.id}`}>
                       {workout.location}
                     </Link>
                   </td>
-                  <td className="overflow-y-auto">
+                  <td className="align-top">
                     <Link href={`/workouts/${workout.id}`}>
                       {workout.notes || ''}
                     </Link>
                   </td>
-                  <td className="flex justify-end text-end">
-                    <div className="md:flex md:items-center">
+                  <td className="align-top">
+                    <div className="flex flex-col md:flex-row items-end justify-end">
                       <Link
-                        className="btn mb-1 md:mb-0 bg-indigo-700 hover:bg-black text-white md:mr-2 font-normal md:font-bold  w-20 md:w-24"
+                        className="btn mb-1 md:mb-0 bg-indigo-700 hover:bg-black text-white md:mr-2 font-normal md:font-bold w-20 md:w-24"
                         href={`/update-workout/${workout.id}`}
                       >
                         Update
