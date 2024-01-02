@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { capitalizeWords } from '../utils/capitalizeWords';
 
 interface Exercise {
   id: string;
@@ -8,29 +9,6 @@ interface Exercise {
   equipment: string;
   gifUrl: string;
   instructions: string[];
-}
-
-function capitalizeWords(input: string): string {
-  const words = input.split(' ');
-
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    if (word.length > 0) {
-      if (word.startsWith('(') && word.endsWith(')')) {
-        words[i] =
-          '(' +
-          word
-            .slice(1, -1)
-            .toLowerCase()
-            .replace(/^\w/, (c) => c.toUpperCase()) +
-          ')';
-      } else {
-        words[i] = word[0].toUpperCase() + word.slice(1);
-      }
-    }
-  }
-
-  return words.join(' ');
 }
 
 const SearchExercise = () => {
@@ -82,14 +60,14 @@ const SearchExercise = () => {
   };
 
   const handleDropdownClick = (
-    event: React.MouseEvent<HTMLDetailsElement, MouseEvent>,
+    e: React.MouseEvent<HTMLDetailsElement, MouseEvent>,
   ) => {
-    event.preventDefault();
+    e.preventDefault();
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleDocumentClick = (event: MouseEvent) => {
-    if (event.target instanceof Element && !event.target.closest('.dropdown')) {
+  const handleDocumentClick = (e: MouseEvent) => {
+    if (e.target instanceof Element && !e.target.closest('.dropdown')) {
       setDropdownOpen(false);
     }
   };
@@ -106,17 +84,17 @@ const SearchExercise = () => {
     <div className="text-center">
       <h1 className="text-3xl font-bold mb-6">Search Exercises</h1>
       <details
-        className="dropdown"
+        className="dropdown cursor-pointer"
         open={dropdownOpen}
         onClick={handleDropdownClick}
       >
         <summary className="m-1 p-5 bg-indigo-700 hover:bg-black text-white rounded font-bold">
           Select A Target Muscle
         </summary>
-        <ul className="shadow menu dropdown-content z-[1] bg-indigo-700 text-black w-96 grid grid-cols-3 rounded left-[-5rem]">
+        <ul className="shadow menu dropdown-content z-[1] bg-indigo-700 text-black w-96 grid grid-cols-3 rounded left-[-4.9rem]">
           {targetMuscles.map((muscle, index) => (
             <li
-              className="font-bold p-3 text-left hover:text-black text-white"
+              className="font-bold p-3 text-left hover:text-black text-white cursor-pointer"
               key={index}
               onClick={() => handleClick(muscle)}
             >

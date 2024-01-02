@@ -2,18 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-select {
-  padding: 13.5px !important;
-  border-radius: 8px !important;
+summary::-webkit-details-marker {
+  display: none;
 }
 
-/* Style the options */
-select option:hover {
-  background-color: red !important;
-  color: black !important;
-}
-
-/* Style the options on hover */
-select option:hover {
-  background-color: red !important;
+summary {
+  list-style: none;
 }
