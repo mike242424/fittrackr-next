@@ -4,7 +4,7 @@ import NavBarDropdown from './components/NavBarDropdown';
 
 const NavBar = () => {
   return (
-    <div className="navbar bg-indigo-700 text-white p-5">
+    <div className="navbar bg-indigo-700 text-white px-8 p-y-1">
       <div className="navbar-start">
         <Link className="flex space-x-4 hover:text-base-100" href="/">
           <CiDumbbell size="3em" />

@@ -9,3 +9,7 @@ summary::-webkit-details-marker {
 summary {
   list-style: none;
 }
+
+.table tbody > tr > td.vertical-aligned {
+  align-items: flex-end !important;
+}

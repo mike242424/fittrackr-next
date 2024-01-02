@@ -24,7 +24,7 @@ const DeleteWorkoutButton = ({ id }: DeleteWorkoutButtonProps) => {
   return (
     <button
       onClick={handleClick}
-      className="btn bg-indigo-700 hover:bg-black text-white"
+      className="btn mt-1 md:mt-0 w-20 md:w-24 bg-indigo-700 hover:bg-black text-white font-normal md:font-bold"
     >
       Delete
     </button>

@@ -40,7 +40,7 @@ const NavbarDropdown = () => {
           />
         </label>
         <div
-          className={`dropdown-content px-2 pt-6 shadow text-white bg-indigo-700 w-96 left-[-8rem] ${
+          className={`dropdown-content px-2 pt-6 shadow text-white bg-indigo-700 w-96 left-[-8rem] z-10 ${
             dropdownOpen ? 'block' : 'hidden'
           }`}
         >
