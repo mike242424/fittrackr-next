@@ -4,31 +4,31 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoIosArrowDropdownCircle } from 'react-icons/io';
 
-const NavBarDropdown = () => {
-  const [dropdownNavOpen, setDropdownNavOpen] = useState(false);
+const NavbarDropdown = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleClick = () => {
-    setDropdownNavOpen((prevDropdownNavOpen) => !prevDropdownNavOpen);
+    setDropdownOpen((prevDropdownOpen) => !prevDropdownOpen);
   };
 
   const handleLinkClick = () => {
-    setDropdownNavOpen(false);
+    setDropdownOpen(false);
   };
 
   const handleDocumentClick = (e: MouseEvent) => {
     const targetElement = e.target as Element;
     if (!targetElement.closest('.dropdown-navbar')) {
-      setDropdownNavOpen(false);
+      setDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleDocumentClick);
+    document.addEventListener('click', handleDocumentClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
+      document.removeEventListener('click', handleDocumentClick);
     };
-  }, []);
+  }, [dropdownOpen]);
 
   return (
     <>
@@ -39,43 +39,33 @@ const NavBarDropdown = () => {
             className="text-white hover:text-base-100 cursor-pointer"
           />
         </label>
-        <ul
-          tabIndex={0}
-          className={`dropdown-content p-5 shadow text-white bg-indigo-700 w-52 left-[-8rem] ${
-            dropdownNavOpen ? 'block' : 'hidden'
+        <div
+          className={`dropdown-content px-2 pt-6 shadow text-white bg-indigo-700 w-96 left-[-8rem] ${
+            dropdownOpen ? 'block' : 'hidden'
           }`}
         >
-          <li className="mt-4 mb-5">
-            <Link
-              className="font-bold add-workout-btn bg-indigo-700 hover:text-black text-sm hover:bg-indigo-700"
-              href="/add-workout"
-              onClick={handleLinkClick}
-            >
-              Add Workout
-            </Link>
-          </li>
-          <li className="mb-5">
-            <Link
-              className="font-bold my-workout-btn bg-indigo-700 hover:text-black text-sm hover:bg-indigo-700"
-              href="/workouts"
-              onClick={handleLinkClick}
-            >
-              My Workouts
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="font-bold my-workout-btn bg-indigo-700 hover:text-black text-sm hover:bg-indigo-700"
-              href="/search-exercise"
-              onClick={handleLinkClick}
-            >
-              Search Exercises
-            </Link>
-          </li>
-        </ul>
+          <div
+            className="font-bold p-3 text-left hover:text-black text-white cursor-pointer text-sm"
+            onClick={handleLinkClick}
+          >
+            <Link href="/add-workout">Add Workout</Link>
+          </div>
+          <div
+            className="font-bold p-3 text-left hover:text-black text-white cursor-pointer text-sm"
+            onClick={handleLinkClick}
+          >
+            <Link href="/workouts">My Workouts</Link>
+          </div>
+          <div
+            className="font-bold p-3 pb-6 text-left hover:text-black text-white cursor-pointer text-sm"
+            onClick={handleLinkClick}
+          >
+            <Link href="/search-exercise">Search Exercises</Link>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default NavBarDropdown;
+export default NavbarDropdown;
